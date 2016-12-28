@@ -8,35 +8,45 @@
     <link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="app/css/custom.css" rel="stylesheet">
 </head>
 
 <body>
 <!-- Navigation -->
 <div ng-cloak>
+    <md-content class="">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Document Management System</h2>
+                <md-nav-bar md-selected-nav-item="currentNavItem">
+                    <md-nav-item md-nav-href="#!/main" name="main">Main</md-nav-item>
+                    <md-nav-item md-nav-href="#!/about" name="about">
+                        <span class="white-text">About</span>
+                    </md-nav-item>
+                </md-nav-bar>
+                <span flex=""></span>
+                <md-button class="md-raised" aria-label="Learn More">
+                    Learn More
+                </md-button>
+            </div>
+        </md-toolbar>
 
-    <md-toolbar>
-        <div class="md-toolbar-tools bg-gradient-9">
-            <h2><span>Document Management System</span></h2>
-            <md-nav-bar md-selected-nav-item="currentNavItem">
-                <md-nav-item md-nav-href="#!/main" name="main">Main</md-nav-item>
-                <md-nav-item md-nav-href="#!/about" name="about">About</md-nav-item>
-            </md-nav-bar>
-            <span flex=""></span>
-            <md-button class="md-raised" aria-label="Learn More">
-                Learn More
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-content class="md-padding">
-        <md-button class="md-raised">Button</md-button>
-        <md-button class="md-raised md-primary">Primary</md-button>
-        <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-        <md-button class="md-raised md-warn">Warn</md-button>
-        <div>
+        <md-fab-speed-dial class="md-fling md-fab-top-right" md-direction="down"
+                           md-open="isOpen" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-accent"><span style="color:white;">GO!</span></md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="A" class="md-fab md-raised md-mini">A</md-button>
+                <md-button aria-label="B" class="md-fab md-raised md-mini">B</md-button>
+                <md-button aria-label="C" class="md-fab md-raised md-mini">C</md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+
+        <div flex-offset-lg="10" flex="80">
             <div ng-view></div>
         </div>
     </md-content>
-
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
