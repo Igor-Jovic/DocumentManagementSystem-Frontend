@@ -22,5 +22,8 @@ app.run(['$rootScope', '$location', '$mdSidenav', function ($rootScope, $locatio
         $rootScope.currentNavItem = $location.path().replace('/', '');
         $rootScope.icon = 'app/images/svg/file-5.svg';
         $rootScope.isOpen = false;
+        $rootScope.toggleLeft = function () {
+            $mdSidenav('left').toggle();
+        }
     });
 }]);
