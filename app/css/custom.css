@@ -1,3 +1,15 @@
+a {
+    color: #1565C0;
+}
+
+.primary-text {
+    color: #1565C0;
+}
+
+a:hover {
+    color: #FF5722;
+}
+
 .md-unselected {
     color: white !important;
 }
@@ -84,8 +96,16 @@ body {
     left: auto;
 }
 
-.sidebar a:hover {
+md-menu-item:hover {
     color: #FF5722;
+}
+
+md-menu-item a {
+    color: inherit !important;
+}
+
+.hover-orange:hover {
+    color: #FF5722 !important;
 }
 
 .sidebar .sidebar-nav.navbar-collapse {
@@ -144,3 +164,6 @@ body {
     margin-top: 25%;
 }
 
+.bring-to-front {
+    display: block !important;
+}

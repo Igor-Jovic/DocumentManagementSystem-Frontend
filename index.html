@@ -16,7 +16,7 @@
 <div ng-cloak>
     <div id="wrapper">
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h2>
@@ -26,25 +26,37 @@
                     <md-button class="md-raised" aria-label="Learn More">
                         Learn More
                     </md-button>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li>
-                                    <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <md-menu md-position-mode="target-right target">
+                        <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </md-button>
+                        <md-menu-content width="2">
+                            <md-menu-item class="primary-text">
+                                <md-button>
+                                    <div layout="row" flex>
+                                        <p flex>Profile </p>
+                                        <i class="fa fa-user fa-fw" style="margin: auto 3px auto 0;"></i>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item class="primary-text">
+                                <md-button>
+                                    <div layout="row" flex>
+                                        <p flex>Settings </p>
+                                        <i class="fa fa-cogs fa-fw" style="margin: auto 3px auto 0;"></i>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item class="primary-text">
+                                <md-button>
+                                    <div layout="row" flex>
+                                        <p flex>Logout </p>
+                                        <i class="fa fa-external-link fa-fw" style="margin: auto 3px auto 0;"></i>
+                                    </div>
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
                 </div>
             </md-toolbar>
         </nav>
