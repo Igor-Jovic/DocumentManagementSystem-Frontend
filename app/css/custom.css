@@ -1,9 +1,9 @@
 a {
-    color: #1565C0;
+    color: rgb(66, 66, 66);
 }
 
-.primary-text {
-    color: #1565C0;
+.hue-2-text {
+    color: rgb(66, 66, 66);
 }
 
 a:hover {
@@ -32,8 +32,8 @@ body {
 @media (min-width: 768px) {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 250px;
-        padding: 0 30px;
+        margin: 0 0 0 5%;
+        padding: 0 0px;
         border-left: 1px solid #e7e7e7;
     }
 }
@@ -104,6 +104,10 @@ md-menu-item a {
     color: inherit !important;
 }
 
+.md-button {
+    min-width: 0 !important;
+}
+
 .hover-orange:hover {
     color: #FF5722 !important;
 }
@@ -150,7 +154,7 @@ md-menu-item a {
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 250px;
+        width: 5%;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -166,4 +170,12 @@ md-menu-item a {
 
 .bring-to-front {
     display: block !important;
+}
+
+.sidebar .md-button,
+.sidebar .md-button:hover {
+    box-shadow: none;
+    border: none;
+    transform: none;
+    -webkit-transform: none;
 }

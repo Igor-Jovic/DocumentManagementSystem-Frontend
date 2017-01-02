@@ -17,7 +17,7 @@
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
-            <md-toolbar>
+            <md-toolbar class="md-hue-2">
                 <div class="md-toolbar-tools">
                     <h2>
                         <span>Document Management System</span>
@@ -31,7 +31,7 @@
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </md-button>
                         <md-menu-content width="2">
-                            <md-menu-item class="primary-text">
+                            <md-menu-item class="hue-2-text">
                                 <md-button>
                                     <div layout="row" flex>
                                         <p flex>Profile </p>
@@ -39,7 +39,7 @@
                                     </div>
                                 </md-button>
                             </md-menu-item>
-                            <md-menu-item class="primary-text">
+                            <md-menu-item class="hue-2-text">
                                 <md-button>
                                     <div layout="row" flex>
                                         <p flex>Settings </p>
@@ -47,7 +47,7 @@
                                     </div>
                                 </md-button>
                             </md-menu-item>
-                            <md-menu-item class="primary-text">
+                            <md-menu-item class="hue-2-text">
                                 <md-button>
                                     <div layout="row" flex>
                                         <p flex>Logout </p>
@@ -64,28 +64,43 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <md-button aria-label="Insert Drive">
+                            <a href="index.html"><i class="fa fa-dashboard fa-2x"></i></a>
+                            <md-tooltip md-visible="false" md-direction="right">
+                                Dashboard
+                            </md-tooltip>
+                        </md-button>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts</a>
+                        <md-button aria-label="Insert Drive">
+                            <a href="#"><i class="fa fa-bar-chart-o fa-2x"></i></a>
+                            <md-tooltip md-visible="false" md-direction="right">
+                                Charts
+                            </md-tooltip>
+                        </md-button>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <md-button aria-label="Insert Drive">
+                            <a href="tables.html"><i class="fa fa-table fa-2x"></i></a>
+                            <md-tooltip md-visible="false" md-direction="right">
+                                Tables
+                            </md-tooltip>
+                        </md-button>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements</a>
+                        <md-button aria-label="Insert Drive">
+                            <a href="#"><i class="fa fa-wrench fa-2x"></i> </a>
+                            <md-tooltip md-visible="false" md-direction="right">
+                                Settings
+                            </md-tooltip>
+                        </md-button>
                     </li>
                 </ul>
             </div>
         </div>
         <div id="page-wrapper">
-            <div class="row">
-                <div flex>
-                    <div ng-view></div>
-                </div>
+            <div flex>
+                <div ng-view></div>
             </div>
         </div>
         <!-- /.navbar-header -->

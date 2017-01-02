@@ -12,18 +12,14 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
         });
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('blue')
+            .primaryPalette('grey')
             .accentPalette('deep-orange')
-            .warnPalette('red');
+            .warnPalette('red')
     }]);
 
 app.run(['$rootScope', '$location', '$mdSidenav', function ($rootScope, $location, $mdSidenav) {
     $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
         $rootScope.currentNavItem = $location.path().replace('/', '');
         $rootScope.icon = 'app/images/svg/file-5.svg';
-        $rootScope.isOpen = false;
-        $rootScope.toggleLeft = function () {
-            $mdSidenav('left').toggle();
-        }
     });
 }]);
