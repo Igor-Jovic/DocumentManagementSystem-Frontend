@@ -5,6 +5,9 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
         $routeProvider.when('/main', {
             templateUrl: 'app/partials/main.html',
             controller: 'MainController'
+        }).when('/authentication', {
+            templateUrl: 'app/partials/auth.html',
+            controller: 'AuthenticationController'
         }).when('/about', {
             templateUrl: 'app/partials/about.html'
         }).otherwise({
@@ -12,14 +15,11 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
         });
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('grey')
+            .primaryPalette('blue')
             .accentPalette('deep-orange')
             .warnPalette('red')
     }]);
 
 app.run(['$rootScope', '$location', '$mdSidenav', function ($rootScope, $location, $mdSidenav) {
-    $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
-        $rootScope.currentNavItem = $location.path().replace('/', '');
-        $rootScope.icon = 'app/images/svg/file-5.svg';
-    });
+    $rootScope.loggedIn = false;
 }]);

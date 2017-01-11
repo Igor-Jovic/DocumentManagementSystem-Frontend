@@ -2,8 +2,19 @@ a {
     color: rgb(66, 66, 66);
 }
 
-.hue-2-text {
+.custom-text {
     color: rgb(66, 66, 66);
+}
+
+/*
+overrides angular material primary
+*/
+.custom-navbar {
+    background-color: rgb(66, 66, 66) !important;
+}
+
+.accent-text {
+    color: #FF5722;
 }
 
 a:hover {
@@ -34,7 +45,6 @@ body {
         position: inherit;
         margin: 0 0 0 5%;
         padding: 0 0px;
-        border-left: 1px solid #e7e7e7;
     }
 }
 
@@ -154,7 +164,8 @@ md-menu-item a {
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 5%;
+        width: 55px;
+        border-right: 1px solid #e7e7e7;
     }
 
     .navbar-top-links .dropdown-messages,
