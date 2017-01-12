@@ -1,5 +1,7 @@
 var app = angular.module("App", ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria']);
 
+app.constant("API_URL", "/dms/");
+
 app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconProvider',
     function ($routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider) {
         $routeProvider.when('/main', {

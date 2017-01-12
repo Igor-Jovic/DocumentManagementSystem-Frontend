@@ -8,13 +8,15 @@
                         <br/>
                         <md-input-container class="md-block">
                             <label class="md-accent">Username</label>
-                            <input type="text" required/>
+                            <input type="text" required ng-model="loginRequest.username">
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Password</label>
-                            <input type="password" required/>
+                            <input type="password" required ng-model="loginRequest.password"/>
                         </md-input-container>
-                        <md-button class="md-raised md-primary col-md-offset-9" style="width: 120px;">Login</md-button>
+                        <md-button class="md-raised md-primary col-md-offset-9" style="width: 120px;"
+                                   ng-click="login()">Login
+                        </md-button>
                     </md-content>
                 </md-tab>
                 <md-tab label="Registration">
