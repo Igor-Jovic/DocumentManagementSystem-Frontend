@@ -1,6 +1,7 @@
-var app = angular.module("App", ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria']);
+var app = angular.module("App", ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngCookies']);
 
-app.constant("API_URL", "/dms/");
+app.constant("API_URL", "/");
+app.constant("TOKEN", "DMS_TOKEN");
 
 app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconProvider',
     function ($routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider) {
@@ -26,13 +27,30 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
 ])
 ;
 
-app.run(['$rootScope', '$location', function ($rootScope, $location) {
-    $rootScope.loggedIn = false;
+app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'AuthenticationService', function ($rootScope, $http, $location, $cookieStore, TOKEN, AuthenticationService) {
+
+    var loginAfterRefresh = function () {
+        $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
+        console.log($cookieStore.get(TOKEN));
+        AuthenticationService.getLoggedUser()
+            .then(function successCallback(response) {
+                if (response.status = 200)
+                    $rootScope.authenticatedUser = response.data.content;
+                $location.path("/main");
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+    };
+
     $rootScope.$on('$locationChangeStart', function (event) {
         if (!$rootScope.authenticatedUser) {
             $location.path("/authentication");
         }
     });
+
+    if ($cookieStore.get(TOKEN)) {
+        loginAfterRefresh();
+    }
 
 }]);
 

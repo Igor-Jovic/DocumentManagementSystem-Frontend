@@ -1,8 +1,11 @@
 app.factory('AuthenticationService', ['$http', '$rootScope', 'API_URL', function ($http, $rootScope, API_URL) {
     var service = {};
 
-    service.login = function (loginRequest, callback) {
+    service.login = function (loginRequest) {
         return $http.post(API_URL + 'auth/login', loginRequest);
+    };
+    service.getLoggedUser = function () {
+        return $http.get(API_URL + 'auth/user');
     };
 
     // service.createEvent = function (event, callback) {
