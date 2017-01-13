@@ -19,9 +19,29 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('deep-orange')
-            .warnPalette('red')
-    }]);
+            .warnPalette('red');
 
-app.run(['$rootScope', '$location', '$mdSidenav', function ($rootScope, $location, $mdSidenav) {
+        $httpProvider.interceptors.push('APIInterceptor');
+    }
+])
+;
+
+app.run(['$rootScope', '$location', function ($rootScope, $location) {
     $rootScope.loggedIn = false;
+
+}]);
+
+app.controller('AppController', ['$rootScope', '$mdToast', function ($rootScope, $mdToast) {
+
+    $rootScope.showToast = function (message) {
+        var toast = $mdToast
+            .simple()
+            .action('CLOSE')
+            .highlightAction(true)
+            .highlightClass('md-accent')
+            .position("bottom left")
+            .hideDelay(5000)
+            .content(message);
+        $mdToast.show(toast);
+    };
 }]);

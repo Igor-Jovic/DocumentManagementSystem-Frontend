@@ -1,4 +1,4 @@
-app.controller('AuthenticationController', ['$scope', '$rootScope', 'AuthenticationService', function ($scope, $rootScope, AuthenticationService) {
+app.controller('AuthenticationController', ['$scope', '$rootScope', 'AuthenticationService', '$mdToast', function ($scope, $rootScope, AuthenticationService, $mdToast) {
 
     $scope.loginRequest = {
         username: "",
@@ -8,10 +8,8 @@ app.controller('AuthenticationController', ['$scope', '$rootScope', 'Authenticat
     $scope.login = function () {
         AuthenticationService.login($scope.loginRequest)
             .then(function successCallback(response) {
-                console.log(response);
-                console.log("pozz")
+                $rootScope.loggedIn = response.data.success;
             }, function errorCallback(response) {
-                console.log("bad");
                 console.log(response);
             });
     }

@@ -21,6 +21,10 @@ a:hover {
     color: #FF5722;
 }
 
+.md-toolbar-tools > button:hover, .md-menu > button:hover {
+    color: #FF5722 !important;
+}
+
 .md-unselected {
     color: white !important;
 }
