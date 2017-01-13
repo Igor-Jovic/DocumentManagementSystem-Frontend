@@ -28,6 +28,11 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
 
 app.run(['$rootScope', '$location', function ($rootScope, $location) {
     $rootScope.loggedIn = false;
+    $rootScope.$on('$locationChangeStart', function (event) {
+        if (!$rootScope.authenticatedUser) {
+            $location.path("/authentication");
+        }
+    });
 
 }]);
 

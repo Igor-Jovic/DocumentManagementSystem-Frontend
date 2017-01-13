@@ -1,4 +1,8 @@
-app.controller('AuthenticationController', ['$scope', '$rootScope', 'AuthenticationService', '$mdToast', function ($scope, $rootScope, AuthenticationService, $mdToast) {
+app.controller('AuthenticationController', ['$scope', '$rootScope', '$location', 'AuthenticationService', function ($scope, $rootScope, $location, AuthenticationService) {
+
+    if ($rootScope.authenticatedUser) {
+        $location.path("/main");
+    }
 
     $scope.loginRequest = {
         username: "",
@@ -8,10 +12,12 @@ app.controller('AuthenticationController', ['$scope', '$rootScope', 'Authenticat
     $scope.login = function () {
         AuthenticationService.login($scope.loginRequest)
             .then(function successCallback(response) {
-                $rootScope.loggedIn = response.data.success;
+                $rootScope.authenticatedUser = response.data.content;
+                $location.path("/main");
             }, function errorCallback(response) {
                 console.log(response);
             });
     }
 }
-]);
+])
+;
