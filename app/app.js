@@ -31,15 +31,10 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
 
     var loginAfterRefresh = function () {
         $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
-        console.log($cookieStore.get(TOKEN));
-        AuthenticationService.getLoggedUser()
-            .then(function successCallback(response) {
-                if (response.status = 200)
-                    $rootScope.authenticatedUser = response.data.content;
-                $location.path("/main");
-            }, function errorCallback(response) {
-                console.log(response);
-            });
+        AuthenticationService.getCurrentUser(function (response) {
+            $rootScope.authenticatedUser = response.data.content;
+            $location.path("/main");
+        });
     };
 
     $rootScope.$on('$locationChangeStart', function (event) {

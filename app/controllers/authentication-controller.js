@@ -1,5 +1,5 @@
-app.controller('AuthenticationController', ['$scope', '$rootScope', '$http', '$cookieStore', '$location', 'AuthenticationService', 'TOKEN',
-    function ($scope, $rootScope, $http, $cookieStore, $location, AuthenticationService, TOKEN) {
+app.controller('AuthenticationController', ['$scope', '$rootScope', '$location', 'AuthenticationService',
+    function ($scope, $rootScope, $location, AuthenticationService) {
 
         if ($rootScope.authenticatedUser) {
             $location.path("/main");
@@ -11,14 +11,10 @@ app.controller('AuthenticationController', ['$scope', '$rootScope', '$http', '$c
         };
 
         $scope.login = function () {
-            AuthenticationService.login($scope.loginRequest)
-                .then(function successCallback(response) {
-                    $rootScope.authenticatedUser = response.data.content;
-                    $cookieStore.put(TOKEN, $rootScope.authenticatedUser.token);
-                    $location.path("/main");
-                }, function errorCallback(response) {
-                    console.log(response);
-                });
+            AuthenticationService.login($scope.loginRequest, function (response) {
+                $rootScope.authenticatedUser = response.data.content;
+                $location.path("/main");
+            });
         }
     }
 ]);
