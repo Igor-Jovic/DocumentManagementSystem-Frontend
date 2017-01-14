@@ -10,10 +10,28 @@ app.controller('AuthenticationController', ['$scope', '$rootScope', '$location',
             password: ""
         };
 
+        $scope.registrationRequest = {
+            username: "",
+            password: "",
+            companyName: ""
+        };
+
+        $scope.passwordConfirmed = "";
+
         $scope.login = function () {
             AuthenticationService.login($scope.loginRequest, function (response) {
                 $rootScope.authenticatedUser = response.data.content;
                 $location.path("/main");
+            });
+        };
+
+        $scope.register = function () {
+            if ($scope.passwordConfirmed != $scope.registrationRequest.password) {
+                $rootScope.showToast("Passwords do not match")
+                return;
+            }
+            AuthenticationService.register($scope.registrationRequest, function (response) {
+                //$rootScope.showToast(response.data.content.message);
             });
         }
     }

@@ -25,26 +25,27 @@
                         <br/>
                         <md-input-container class="md-block">
                             <label class="md-accent">Username</label>
-                            <input type="text" required/>
+                            <input type="text" required ng-model="registrationRequest.username"/>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Password</label>
-                            <input type="password" required/>
+                            <input type="password" required ng-model="registrationRequest.password"/>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Confirm password</label>
-                            <input type="password" required/>
+                            <input type="password" required ng-model="passwordConfirmed"/>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Company name <i class="fa fa-info-circle"></i></label>
-                            <input type="text" required/>
+                            <input type="text" required ng-model="registrationRequest.companyName"/>
                         </md-input-container>
-                        <div class="alert alert-info">
+                        <div class=" alert alert-info">
                             <strong><i class="fa fa-info-circle"></i></strong>
                             Signing up automatically registers a new company, if you wish to join an
                             existing company, please contact your administrator.
                         </div>
-                        <md-button class="md-raised md-primary col-md-offset-9" style="width: 120px;">Register
+                        <md-button class="md-raised md-primary col-md-offset-9" style="width: 120px;"
+                                   ng-click="register()">Register
                         </md-button>
                     </md-content>
                 </md-tab>

@@ -6,6 +6,26 @@ app.factory('AuthenticationService', ['$http', '$rootScope', '$cookieStore', '$l
             $http.post(API_URL + 'auth/login', loginRequest)
                 .then(function successCallback(response) {
                     $cookieStore.put(TOKEN, response.data.content.token);
+                    $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
+                    callback(response)
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+
+        };
+        service.logout = function (callback) {
+            $http.delete(API_URL + 'auth/logout')
+                .then(function successCallback(response) {
+                    callback(response)
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+
+        };
+
+        service.register = function (registrationRequest, callback) {
+            $http.post(API_URL + 'auth/registration', registrationRequest)
+                .then(function successCallback(response) {
                     callback(response)
                 }, function errorCallback(response) {
                     console.log(response);

@@ -36,6 +36,13 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
             $location.path("/main");
         });
     };
+    
+    $rootScope.logout = function () {
+        AuthenticationService.logout(function (response) {
+            console.log("logout")
+            console.log(response)
+        })
+    }
 
     $rootScope.$on('$locationChangeStart', function (event) {
         if (!$rootScope.authenticatedUser) {
@@ -62,4 +69,6 @@ app.controller('AppController', ['$rootScope', '$mdToast', function ($rootScope,
             .content(message);
         $mdToast.show(toast);
     };
+
+
 }]);
