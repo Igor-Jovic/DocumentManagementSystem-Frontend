@@ -8,7 +8,7 @@ app.factory('APIInterceptor', ['$rootScope', '$q', '$location', '$cookieStore', 
                     $cookieStore.remove(TOKEN);
                     $location.path("/authentication");
                 }
-                $rootScope.showToast(response.data.errorMessage)
+                $rootScope.showToast(response.data.errorMessage);
                 return $q.reject(response);
             },
             response: function (response) {

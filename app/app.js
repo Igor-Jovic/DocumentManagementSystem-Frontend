@@ -11,6 +11,9 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
         }).when('/authentication', {
             templateUrl: 'app/partials/auth.html',
             controller: 'AuthenticationController'
+        }).when('/users', {
+            templateUrl: 'app/partials/users.html',
+            controller: 'UsersController'
         }).when('/about', {
             templateUrl: 'app/partials/about.html'
         }).otherwise({
@@ -29,6 +32,10 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
 
 app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'AuthenticationService', function ($rootScope, $http, $location, $cookieStore, TOKEN, AuthenticationService) {
 
+
+    //TODO: THIS IS JUST FOR DEVELOPMENT:
+    //$rootScope.authenticatedUser = "defined";
+
     var loginAfterRefresh = function () {
         $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
         AuthenticationService.getCurrentUser(function (response) {
@@ -36,13 +43,13 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
             $location.path("/main");
         });
     };
-    
+
     $rootScope.logout = function () {
         AuthenticationService.logout(function (response) {
-            console.log("logout")
+            console.log("logout");
             console.log(response)
         })
-    }
+    };
 
     $rootScope.$on('$locationChangeStart', function (event) {
         if (!$rootScope.authenticatedUser) {
