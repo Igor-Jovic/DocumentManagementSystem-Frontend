@@ -11,6 +11,15 @@ app.factory('UserService', ['$http', '$rootScope', 'API_URL',
                 });
         };
 
+        service.deleteUser = function (id, callback) {
+            $http.delete(API_URL + "/" + id, {})
+                .then(function successCallback(response) {
+                    callback(response)
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+        };
+
         //
         // service.logout = function (callback) {
         //     $http.delete(API_URL + 'auth/logout')
@@ -76,13 +85,7 @@ app.factory('UserService', ['$http', '$rootScope', 'API_URL',
         //             callback(response);
         //         });
         // };
-        // service.deleteEvent = function (id, callback) {
-        //     $http.delete($rootScope.webApiPath + 'events/' + id, {})
-        //         .success(
-        //             function (response) {
-        //                 callback(response);
-        //             });
-        // };
+
         return service;
     }
 ]);

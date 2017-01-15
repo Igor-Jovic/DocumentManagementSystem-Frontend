@@ -1,5 +1,7 @@
 a {
     color: rgb(66, 66, 66);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .custom-text {

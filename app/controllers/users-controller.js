@@ -2,11 +2,10 @@ app.controller('UsersController', ['$scope', '$rootScope', 'UserService',
     function ($scope, $rootScope, UserService) {
 
         $scope.selected = [];
-        // UserService.getAllUsers(function (response) {
-        //     $scope.users = response.data.content;
-        //     console.log($scope.users);
-        // });
-       
+        UserService.getAllUsers(function (response) {
+            $scope.users = response.data.content;
+            console.log($scope.users);
+        });
 
         $scope.users = [
             {
