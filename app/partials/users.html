@@ -1,10 +1,54 @@
 <div class="col-md-12">
-    <!--<h1 class="page-header">-->
-    <!--</h1>-->
-    <!--<md-button class="md-icon-button" aria-label="More">-->
-    <!--<md-icon md-svg-src="{{icon}}"></md-icon>-->
-    <!--</md-button>-->
-    <h1>Users page</h1>
-    <p ng-repeat="user in users"> {{user.id + user.username + user.role}}</p>
-</div>
 
+    <div class="page-header">
+        <md-toolbar class="custom-navbar">
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>User management</span>
+                </h3>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Favorite">
+                    <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
+                </md-button>
+                <md-button class="md-raised">
+                    <i class="fa fa-plus"></i> Add user
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
+
+
+    <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+               table-card="{visible: true, title: 'Users'}"
+               mdt-row="{
+                      data: filteredUsers,
+                      'table-row-id-key': 'id',
+                      'column-keys': [
+                          'id',
+                          'username',
+                          'role',
+                          'action'
+                          ]
+                      }"
+               animate-sort-icon="true"
+               alternate-headers="'contextual'">
+        <mdt-header-row>
+            <mdt-column align-rule="left" column-sort="true"><span>ID</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Username</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Role</span></mdt-column>
+            <mdt-column align-rule="center"><span>Actions</span></mdt-column>
+        </mdt-header-row>
+        <mdt-custom-cell column-key="action">
+            <a class=""><i class="fa fa-remove">Remove</i></a>
+        </mdt-custom-cell>
+    </mdt-table>
+    <md-card style="margin:0; padding: 0;">
+        <md-input-container style="margin-left: 10px; margin-top: 30px; margin-bottom: 0; padding-bottom: 0;">
+            <label>Filter by search</label>
+            <input type="text" ng-model="filterText">
+        </md-input-container>
+    </md-card>
+    <div ng-hide="true">
+        {{(filteredUsers = (users | filter: filterText))}}
+    </div>
+</div>

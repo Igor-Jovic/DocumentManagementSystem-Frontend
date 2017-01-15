@@ -1,4 +1,4 @@
-var app = angular.module("App", ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngCookies']);
+var app = angular.module("App", ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngCookies', 'mdDataTable']);
 
 app.constant("API_URL", "/");
 app.constant("TOKEN", "DMS_TOKEN");
@@ -34,7 +34,7 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
 
 
     //TODO: THIS IS JUST FOR DEVELOPMENT:
-    //$rootScope.authenticatedUser = "defined";
+    $rootScope.authenticatedUser = "defined";
 
     var loginAfterRefresh = function () {
         $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
@@ -51,11 +51,11 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
         })
     };
 
-    $rootScope.$on('$locationChangeStart', function (event) {
-        if (!$rootScope.authenticatedUser) {
-            $location.path("/authentication");
-        }
-    });
+    // $rootScope.$on('$locationChangeStart', function (event) {
+    //     if (!$rootScope.authenticatedUser) {
+    //         $location.path("/authentication");
+    //     }
+    // });
 
     if ($cookieStore.get(TOKEN)) {
         loginAfterRefresh();
