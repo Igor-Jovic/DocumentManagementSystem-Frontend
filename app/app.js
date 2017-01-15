@@ -31,36 +31,36 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
 ;
 
 app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'AuthenticationService', function ($rootScope, $http, $location, $cookieStore, TOKEN, AuthenticationService) {
-
-
     //TODO: THIS IS JUST FOR DEVELOPMENT:
-    $rootScope.authenticatedUser = "defined";
+    // $rootScope.authenticatedUser = "defined";
 
     var loginAfterRefresh = function () {
         $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
         AuthenticationService.getCurrentUser(function (response) {
+            console.log("getting the user")
             $rootScope.authenticatedUser = response.data.content;
-            $location.path("/main");
+            console.log($rootScope.authenticatedUser);
+            // $location.path("/main");
         });
     };
+    if ($cookieStore.get(TOKEN)) {
+        loginAfterRefresh();
+    }
+
+    $rootScope.$on('$locationChangeStart', function (event) {
+        if (!$rootScope.authenticatedUser) {
+            console.log("not auth?")
+            $location.path("/authentication");
+        }
+    });
 
     $rootScope.logout = function () {
+        $rootScope.authenticatedUser = undefined;
         AuthenticationService.logout(function (response) {
             console.log("logout");
             console.log(response)
         })
     };
-
-    // $rootScope.$on('$locationChangeStart', function (event) {
-    //     if (!$rootScope.authenticatedUser) {
-    //         $location.path("/authentication");
-    //     }
-    // });
-
-    if ($cookieStore.get(TOKEN)) {
-        loginAfterRefresh();
-    }
-
 }]);
 
 app.controller('AppController', ['$rootScope', '$mdToast', function ($rootScope, $mdToast) {

@@ -7,16 +7,12 @@
                     <span>User management</span>
                 </h3>
                 <span flex></span>
-                <md-button class="md-icon-button" aria-label="Favorite">
-                    <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
-                </md-button>
-                <md-button class="md-raised">
+                <md-button class="md-raised" ng-click="showCreateUserDialog($event)">
                     <i class="fa fa-plus"></i> Add user
                 </md-button>
             </div>
         </md-toolbar>
     </div>
-
 
     <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
                table-card="{visible: true, title: 'Users'}"
@@ -45,5 +41,44 @@
     </md-card>
     <div ng-hide="true">
         {{(filteredUsers = (users | filter: filterText))}}
+    </div>
+</div>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="createUserDialog">
+        <md-dialog layout-padding>
+            <md-content class="md-padding">
+                <h1 class="md-display-1 text-center">Create user</h1>
+                <br/>
+                <div style="padding: 10px;">
+                    <md-input-container class="md-block">
+                        <label class="md-accent">Username</label>
+                        <input type="text" required ng-model="userRequest.username"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="password" required ng-model="userRequest.password"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Confirm password</label>
+                        <input type="password" required ng-model="passwordConfirmed"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Role</label>
+                        <md-select ng-model="userRequest.role">
+                            <md-option value="ADMIN">
+                                Administrator
+                            </md-option>
+                            <md-option value="USER">
+                                User
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-button class="md-raised md-primary center-block"
+                               ng-click="createUser()">Save
+                    </md-button>
+                </div>
+            </md-content>
+        </md-dialog>
     </div>
 </div>

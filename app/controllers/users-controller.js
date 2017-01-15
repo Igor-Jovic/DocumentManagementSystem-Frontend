@@ -1,11 +1,55 @@
-app.controller('UsersController', ['$scope', '$rootScope', 'UserService',
-    function ($scope, $rootScope, UserService) {
+app.controller('UsersController', ['$scope', '$rootScope', 'UserService', '$mdDialog',
+    function ($scope, $rootScope, UserService, $mdDialog) {
 
         $scope.selected = [];
         UserService.getAllUsers(function (response) {
             $scope.users = response.data.content;
-            console.log($scope.users);
         });
+
+
+        $scope.createUser = function () {
+            if ($scope.passwordConfirmed != $scope.userRequest.password) {
+                $rootScope.showToast("Passwords do not match")
+                return;
+            }
+            UserService.createUser($scope.userRequest, function (response) {
+                $scope.users.push(response.data.content);
+            });
+            $mdDialog.hide();
+        };
+
+        $scope.showCreateUserDialog = function (ev) {
+            $scope.userRequest = {
+                username: "",
+                password: "",
+                role: ""
+            };
+
+            $scope.passwordConfirmed = "";
+            $mdDialog.show({
+                // controller: DialogController,
+                contentElement: '#createUserDialog',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        };
+
+
+        // function DialogController($scope, $mdDialog) {
+        //     $scope.hide = function () {
+        //         $scope.users = [];
+        //         $mdDialog.hide();
+        //     };
+        //
+        //     $scope.cancel = function () {
+        //         $mdDialog.cancel();
+        //     };
+        //
+        //     $scope.answer = function (answer) {
+        //         $mdDialog.hide(answer);
+        //     };
+        // };
 
         $scope.users = [
             {
@@ -50,5 +94,7 @@ app.controller('UsersController', ['$scope', '$rootScope', 'UserService',
                 role: 'USER'
             }];
 
-    }]);
+    }
+])
+;
 

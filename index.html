@@ -75,8 +75,8 @@
                             </md-tooltip>
                         </md-button>
                     </li>
-                    <li>
-                        <md-button aria-label="Insert Drive">
+                    <li ng-if="authenticatedUser.userRole=='ADMIN'">
+                        <md-button>
                             <a href="#!/users"><i class="fa fa-users fa-2x"></i></a>
                             <md-tooltip md-visible="false" md-direction="right">
                                 Users

@@ -20,6 +20,15 @@ app.factory('UserService', ['$http', '$rootScope', 'API_URL',
                 });
         };
 
+        service.createUser = function (userRequest, callback) {
+            $http.post(API_URL + "users", userRequest)
+                .then(function successCallback(response) {
+                    callback(response)
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+        };
+
         //
         // service.logout = function (callback) {
         //     $http.delete(API_URL + 'auth/logout')
