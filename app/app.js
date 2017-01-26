@@ -82,7 +82,29 @@ app.controller('AppController', ['$rootScope', '$mdToast', function ($rootScope,
             name: "item1",
             items: [
                 {
-                    name: "item11"
+                    name: "item11",
+                    items: [
+                        {
+                            name: "item111",
+                            items: [
+                                {
+                                    name: "item111"
+                                },
+                                {
+                                    name: "item112"
+                                },
+                                {
+                                    name: "item113"
+                                }
+                            ]
+                        },
+                        {
+                            name: "item112"
+                        },
+                        {
+                            name: "item113"
+                        }
+                    ]
                 },
                 {
                     name: "item12"

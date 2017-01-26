@@ -74,16 +74,23 @@
     </md-toolbar>
 
     <script type="text/ng-template" id="processTree">
-        <button data-toggle="collapse" data-target="#children-of-{{item.name}}">{{ item.name}}</button>
+        <div class="list-inline">
+            <md-button class="md-raised hover-orange" data-toggle="collapse" data-target="#children-of-{{item.name}}">{{
+                item.name}}
+            </md-button>
+            <md-button class="md-fab md-mini md-primary" aria-label="Profile">
+                <i class="fa fa-plus"></i>
+            </md-button>
+        </div>
         <div id="children-of-{{item.name}}" class="collapse">
-            <ul ng-if="item.items">
+            <ul ng-if="item.items" class="no-bulleting">
                 <li ng-repeat="item in item.items" ng-include="'processTree'">
                 </li>
             </ul>
         </div>
     </script>
 
-    <ul>
+    <ul class="no-bulleting">
         <li ng-repeat="item in items" ng-include="'processTree'"></li>
     </ul>
 
