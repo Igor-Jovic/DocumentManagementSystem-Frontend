@@ -72,5 +72,22 @@
             </div>
         </div>
     </md-toolbar>
+
+    <script type="text/ng-template" id="processTree">
+        <button data-toggle="collapse" data-target="#children-of-{{item.name}}">{{ item.name}}</button>
+        <div id="children-of-{{item.name}}" class="collapse">
+            <ul ng-if="item.items">
+                <li ng-repeat="item in item.items" ng-include="'processTree'">
+                </li>
+            </ul>
+        </div>
+    </script>
+
+    <ul>
+        <li ng-repeat="item in items" ng-include="'processTree'"></li>
+    </ul>
+
 </div>
+
+
 

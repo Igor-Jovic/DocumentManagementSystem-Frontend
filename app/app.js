@@ -77,5 +77,35 @@ app.controller('AppController', ['$rootScope', '$mdToast', function ($rootScope,
         $mdToast.show(toast);
     };
 
+    $rootScope.items = [
+        {
+            name: "item1",
+            items: [
+                {
+                    name: "item11"
+                },
+                {
+                    name: "item12"
+                },
+                {
+                    name: "item13"
+                }
+            ]
+        },
+        {
+            name: "item2",
+            items: [
+                {
+                    name: "item21"
+                },
+                {
+                    name: "item22"
+                },
+                {
+                    name: "item23"
+                }
+            ]
+        }
+    ]
 
 }]);
