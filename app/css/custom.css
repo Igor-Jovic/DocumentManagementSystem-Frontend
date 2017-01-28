@@ -200,3 +200,7 @@ md-menu-item a {
 .no-bulleting {
     list-style-type: none;
 }
+
+.tree-root {
+    padding: 0;
+}
