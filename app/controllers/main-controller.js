@@ -1,9 +1,13 @@
-app.controller('MainController', ['$scope', '$rootScope', 'TreeService', function ($scope, $rootScope, TreeService) {
+app.controller('MainController', ['$scope', '$rootScope', 'TreeService', 'ProcessService', function ($scope, $rootScope, TreeService, ProcessService) {
 
-    TreeService.getProcessTree(function (response) {
-        $scope.processes = response.data.content;
-        console.log(response)
-    });
+    var loadTree = function () {
+        TreeService.getProcessTree(function (response) {
+            $scope.processes = response.data.content;
+            console.log(response)
+        });
+    };
+
+    loadTree();
 
 
 }]);

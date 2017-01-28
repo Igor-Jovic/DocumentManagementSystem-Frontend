@@ -9,56 +9,8 @@
     </md-toolbar>
 
     <div class="col-md-5">
-        <ul class="no-bulleting tree-root">
-            <li ng-repeat="process in processes" ng-include="'processTree'"></li>
-            <md-button class="md-fab md-mini md-primary">
-                <i class="fa fa-plus"></i>
-                <md-tooltip md-direction="right">
-                    Create new company process
-                </md-tooltip>
-            </md-button>
-        </ul>
-        <script type="text/ng-template" id="processTree">
-            <div class="list-inline">
-                <md-button class="md-raised hover-orange" data-toggle="collapse"
-                           data-target="#children-of-{{process.id}}">
-                    {{process.name}}
-                </md-button>
-            </div>
-            <hr/>
-            <div id="children-of-{{process.id}}" class="collapse">
-                <ul ng-if="!process.isPrimitive" class="no-bulleting">
-                    <li ng-repeat="process in process.childProcesses" ng-include="'processTree'">
-                    </li>
-                    <li>
-                        <md-button class="md-fab md-mini md-primary">
-                            <i class="fa fa-plus"></i>
-                            <md-tooltip md-direction="right">
-                                Create new subprocess
-                            </md-tooltip>
-                        </md-button>
-                    </li>
-                </ul>
-                <ul ng-if="process.isPrimitive" class="no-bulleting">
-                    <li ng-repeat="activity in process.activities">
-                        <md-button class="md-accent">
-                            {{activity.name}}
-                        </md-button>
-                    </li>
-                    <li>
-                        <md-button class="md-fab md-mini md-primary">
-                            <i class="fa fa-plus"></i>
-                            <md-tooltip md-direction="right">
-                                Create new activity
-                            </md-tooltip>
-                        </md-button>
-                    </li>
-                </ul>
-                <hr/>
-            </div>
-        </script>
+        <tree-directive processes="processes"></tree-directive>
     </div>
-
 </div>
 
 
