@@ -133,7 +133,6 @@
     <script src="app/controllers/main-controller.js"></script>
     <script src="app/controllers/authentication-controller.js"></script>
     <script src="app/controllers/users-controller.js"></script>
-    <script src="app/controllers/doctype-controller.js"></script>
 </div>
 </body>
 </html>

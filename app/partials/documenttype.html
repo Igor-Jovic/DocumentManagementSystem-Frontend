@@ -1,0 +1,66 @@
+<div class="col-md-12">
+    <div class="page-header">
+        <md-toolbar class="custom-navbar">
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>Document type management</span>
+                </h3>
+                <span flex></span>
+                <md-button class="md-raised" ng-click="showCreateDocTypeDialog($event)">
+                    <i class="fa fa-plus"></i> Add document type
+                </md-button>
+            </div>
+        </md-toolbar>
+    </div>
+
+    <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+               table-card="{visible: true, title: 'Document types'}"
+               mdt-row="{
+                      data: filteredDocs,
+                      'table-row-id-key': 'id',
+                      'column-keys': [
+                          'id',
+                          'name',
+                          'descriptorsText'
+                          ]
+                      }"
+               animate-sort-icon="true">
+        <mdt-header-row>
+            <mdt-column align-rule="left" column-sort="true"><span>ID</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Name</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Descriptors</span></mdt-column>
+        </mdt-header-row>
+    </mdt-table>
+
+    <md-card style="margin:0; padding: 0;">
+        <md-input-container style="margin-left: 10px; margin-top: 30px; margin-bottom: 0; padding-bottom: 0;">
+            <label>Filter by search</label>
+            <input type="text" ng-model="filterText">
+        </md-input-container>
+    </md-card>
+    <div ng-hide="true">
+        {{(filteredDocs = (docs | filter: filterText))}}
+    </div>
+</div>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="createDialog">
+        <md-dialog layout-padding>
+            <md-content class="md-padding">
+                <h1 class="md-display-1 text-center">Create document type</h1>
+                <br/>
+                <div style="padding: 10px;">
+                    <md-input-container class="md-block">
+                        <label class="md-accent">Name</label>
+                        <input type="text" required ng-model="docTypeRequest.name"/>
+                    </md-input-container>
+                    <md-chips ng-model="docTypeRequest.descriptors" placeholder="Add an item" md-max-chips="10">
+                    </md-chips>
+                    <md-button class="md-raised md-primary center-block"
+                               ng-click="createDocType()">Save
+                    </md-button>
+                </div>
+            </md-content>
+        </md-dialog>
+    </div>
+</div>
