@@ -3,7 +3,7 @@ app.factory('ProcessService', ['$http', '$rootScope', 'API_URL',
         var service = {};
 
         service.createMainProcess = function (processName, callback) {
-            $http.post(API_URL + "users", {
+            $http.post(API_URL + "processes", {
                 'name': processName,
                 'primitive': false,
                 'parentProcess': null

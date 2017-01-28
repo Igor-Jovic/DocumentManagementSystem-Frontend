@@ -1,7 +1,7 @@
 <ul class="no-bulleting tree-root">
     <li ng-repeat="process in processes" ng-include="'processTree'"></li>
-    <md-button class="md-fab md-mini md-primary">
-        <i class="fa fa-plus"></i>
+    <md-button class="md-fab md-mini md-primary" ng-click="createNewProcess($event)">
+        <i class=" fa fa-plus"></i>
         <md-tooltip md-direction="right">
             Create new company process
         </md-tooltip>
