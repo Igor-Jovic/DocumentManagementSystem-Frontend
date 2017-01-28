@@ -20,10 +20,16 @@
             <li ng-repeat="process in process.childProcesses" ng-include="'processTree'">
             </li>
             <li>
-                <md-button class="md-fab md-mini md-primary">
+                <md-button class="md-fab md-mini md-primary" ng-click="createNewSubprocess($event, process.id)">
                     <i class="fa fa-plus"></i>
                     <md-tooltip md-direction="right">
                         Create new subprocess
+                    </md-tooltip>
+                </md-button>
+                <md-button class="md-fab md-mini md-accent" ng-click="createNewPrimitiveProcess($event, process.id)">
+                    <i class="fa fa-plus"></i>
+                    <md-tooltip md-direction="right">
+                        Create new primitive process
                     </md-tooltip>
                 </md-button>
             </li>

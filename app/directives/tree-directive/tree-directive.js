@@ -15,25 +15,50 @@ app.directive('treeDirective', function () {
                 loadTree();
 
                 $scope.createNewProcess = function (ev) {
-                    // Appending dialog to document.body to cover sidenav in docs app
-                    var confirm = newProcessPrompt(ev);
+                    var confirm = newProcessPrompt(ev, "Enter process name");
 
-                    $mdDialog.show(confirm).then(function (processName) {
-                        ProcessService.createMainProcess(processName, function () {
-                            loadTree();
-                        })
-                    }, function () {
-                    });
+                    $mdDialog.show(confirm)
+                        .then(function (processName) {
+                            ProcessService.createMainProcess(processName, function () {
+                                loadTree();
+                            })
+                        }, function () {
+                        });
                 };
 
-                function newProcessPrompt(ev) {
-                    var confirm = $mdDialog.prompt()
-                        .title('Enter process name')
+                $scope.createNewSubprocess = function (ev, parentProcessId) {
+                    var confirm = newProcessPrompt(ev, "Enter subprocess name");
+
+                    $mdDialog.show(confirm)
+                        .then(function (processName) {
+                            console.log(parentProcessId);
+                            ProcessService.createSubprocess(processName, parentProcessId, function () {
+                                loadTree();
+                            })
+                        }, function () {
+                        });
+                };
+
+                $scope.createNewPrimitiveProcess = function (ev, parentProcessId) {
+                    var confirm = newProcessPrompt(ev, "Enter primitive process name");
+
+                    $mdDialog.show(confirm)
+                        .then(function (processName) {
+                            console.log(parentProcessId);
+                            ProcessService.createPrimitiveProcess(processName, parentProcessId, function () {
+                                loadTree();
+                            })
+                        }, function () {
+                        });
+                };
+
+                function newProcessPrompt(ev, title) {
+                    return $mdDialog.prompt()
+                        .title(title)
                         .placeholder('Process name')
                         .targetEvent(ev)
                         .ok('Create')
                         .cancel('Cancel');
-                    return confirm;
                 }
             }]
     }
