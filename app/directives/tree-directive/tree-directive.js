@@ -87,6 +87,8 @@ app.directive('treeDirective', function () {
 
                 $scope.inputType = {};
                 $scope.outputType= {};
+                $scope.inputDocuments = null;
+                $scope.outputDocuments = null;
                 $scope.selectedActivity = null;
 
                 $scope.getDescriptorsForActivity = function (ev, activity) {
@@ -97,6 +99,13 @@ app.directive('treeDirective', function () {
 
                     DocTypeService.getOne(activity.outputDocumentType.id, function (response) {
                         $scope.outputType = response.data.content;
+                    });
+                };
+
+                $scope.getDocumentsForActivity = function (ev, activity) {
+                    DocumentService.getAllForActivity(activity.id, function (response) {
+                        $scope.inputDocuments = response.data.content.inputs;
+                        $scope.outputDocuments = response.data.content.outputs;
                     });
                 };
                 
