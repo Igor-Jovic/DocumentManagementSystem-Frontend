@@ -41,7 +41,7 @@
                 </md-button>
             </li>
             <li>
-                <md-button class="md-fab md-mini md-primary">
+                <md-button class="md-fab md-mini md-primary" ng-click="showCreateActivityDialog($event, process.id)">
                     <i class="fa fa-plus"></i>
                     <md-tooltip md-direction="right">
                         Create new activity
@@ -52,3 +52,39 @@
         <hr/>
     </div>
 </script>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="createActivityDialog">
+        <md-dialog layout-padding>
+            <md-content class="md-padding">
+                <h1 class="md-display-1 text-center">Create activity</h1>
+                <br/>
+                <div style="padding: 10px;">
+                    <md-input-container class="md-block">
+                        <label class="md-accent">Activity name</label>
+                        <input type="text" required ng-model="activityRequest.name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Input document type</label>
+                        <md-select ng-model="activityRequest.inputDocumentTypeId">
+                            <md-option ng-repeat="docType in documentTypes" value="{{docType.id}}">
+                                {{docType.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Output document type</label>
+                        <md-select ng-model="activityRequest.outputDocumentTypeId">
+                            <md-option ng-repeat="docType in documentTypes" value="{{docType.id}}">
+                                {{docType.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-button class="md-raised md-primary center-block"
+                               ng-click="createActivity()">Save
+                    </md-button>
+                </div>
+            </md-content>
+        </md-dialog>
+    </div>
+</div>

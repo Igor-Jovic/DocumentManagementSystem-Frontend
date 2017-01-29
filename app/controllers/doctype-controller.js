@@ -24,7 +24,6 @@ app.controller('DocTypeController', ['$scope', '$rootScope', 'DocTypeService', '
 
             $scope.passwordConfirmed = "";
             $mdDialog.show({
-                // controller: DialogController,
                 contentElement: '#createDialog',
                 parent: angular.element(document.body),
                 targetEvent: ev,
