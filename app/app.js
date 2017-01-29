@@ -15,7 +15,7 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
             templateUrl: 'app/partials/users.html',
             controller: 'UsersController'
         }).when('/documenttype', {
-            templateUrl: 'partials/documenttype.html',
+            templateUrl: 'app/partials/documenttype.html',
             controller: 'DocTypeController'
         }).when('/about', {
             templateUrl: 'app/partials/about.html'

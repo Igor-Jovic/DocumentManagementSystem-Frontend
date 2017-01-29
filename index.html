@@ -36,22 +36,6 @@
                         </md-button>
                         <md-menu-content width="2">
                             <md-menu-item class="custom-text">
-                                <md-button>
-                                    <div layout="row" flex>
-                                        <p flex>Profile </p>
-                                        <i class="fa fa-user fa-fw" style="margin: auto 3px auto 0;"></i>
-                                    </div>
-                                </md-button>
-                            </md-menu-item>
-                            <md-menu-item class="custom-text">
-                                <md-button>
-                                    <div layout="row" flex>
-                                        <p flex>Settings </p>
-                                        <i class="fa fa-cogs fa-fw" style="margin: auto 3px auto 0;"></i>
-                                    </div>
-                                </md-button>
-                            </md-menu-item>
-                            <md-menu-item class="custom-text">
                                 <md-button ng-click="logout()">
                                     <div layout="row" flex>
                                         <p flex>Logout </p>
@@ -69,9 +53,9 @@
                 <ul class="nav" id="side-menu">
                     <li>
                         <md-button aria-label="Insert Drive">
-                            <a href="index.html"><i class="fa fa-dashboard fa-2x"></i></a>
+                            <a href="#!/main"><i class="fa fa-align-left fa-2x"></i></a>
                             <md-tooltip md-visible="false" md-direction="right">
-                                Dashboard
+                                Process management
                             </md-tooltip>
                         </md-button>
                     </li>
@@ -85,17 +69,9 @@
                     </li>
                     <li>
                         <md-button aria-label="Insert Drive">
-                            <a href="tables.html"><i class="fa fa-table fa-2x"></i></a>
+                            <a href="#!/documenttype"><i class="fa fa-file-text fa-2x"></i></a>
                             <md-tooltip md-visible="false" md-direction="right">
-                                Tables
-                            </md-tooltip>
-                        </md-button>
-                    </li>
-                    <li>
-                        <md-button aria-label="Insert Drive">
-                            <a href="#"><i class="fa fa-wrench fa-2x"></i> </a>
-                            <md-tooltip md-visible="false" md-direction="right">
-                                Settings
+                                Document type management
                             </md-tooltip>
                         </md-button>
                     </li>
