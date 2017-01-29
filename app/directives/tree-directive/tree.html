@@ -1,57 +1,86 @@
-<ul class="no-bulleting tree-root">
-    <li ng-repeat="process in processes" ng-include="'processTree'"></li>
-    <md-button class="md-fab md-mini md-primary" ng-click="createNewProcess($event)">
-        <i class=" fa fa-plus"></i>
-        <md-tooltip md-direction="right">
-            Create new company process
-        </md-tooltip>
-    </md-button>
-</ul>
-<script type="text/ng-template" id="processTree">
-    <div class="list-inline">
-        <md-button class="md-raised hover-orange" data-toggle="collapse"
-                   data-target="#children-of-{{process.id}}">
-            {{process.name}}
+<div class="col-md-12">
+    <ul class="no-bulleting tree-root">
+        <li ng-repeat="process in processes" ng-include="'processTree'"></li>
+        <md-button class="md-fab md-mini md-primary" ng-click="createNewProcess($event)">
+            <i class=" fa fa-plus"></i>
+            <md-tooltip md-direction="right">
+                Create new company process
+            </md-tooltip>
         </md-button>
-    </div>
-    <hr/>
-    <div id="children-of-{{process.id}}" class="collapse">
-        <ul ng-if="!process.isPrimitive" class="no-bulleting">
-            <li ng-repeat="process in process.childProcesses" ng-include="'processTree'">
-            </li>
-            <li>
-                <md-button class="md-fab md-mini md-primary" ng-click="createNewSubprocess($event, process.id)">
-                    <i class="fa fa-plus"></i>
-                    <md-tooltip md-direction="right">
-                        Create new subprocess
-                    </md-tooltip>
-                </md-button>
-                <md-button class="md-fab md-mini md-accent" ng-click="createNewPrimitiveProcess($event, process.id)">
-                    <i class="fa fa-plus"></i>
-                    <md-tooltip md-direction="right">
-                        Create new primitive process
-                    </md-tooltip>
-                </md-button>
-            </li>
-        </ul>
-        <ul ng-if="process.isPrimitive" class="no-bulleting">
-            <li ng-repeat="activity in process.activities">
-                <md-button class="md-accent">
-                    {{activity.name}}
-                </md-button>
-            </li>
-            <li>
-                <md-button class="md-fab md-mini md-primary" ng-click="showCreateActivityDialog($event, process.id)">
-                    <i class="fa fa-plus"></i>
-                    <md-tooltip md-direction="right">
-                        Create new activity
-                    </md-tooltip>
-                </md-button>
-            </li>
-        </ul>
+    </ul>
+    <script type="text/ng-template" id="processTree">
+        <div class="list-inline">
+            <md-button class="md-raised hover-orange" data-toggle="collapse"
+                       data-target="#children-of-{{process.id}}">
+                {{process.name}}
+            </md-button>
+        </div>
         <hr/>
+        <div id="children-of-{{process.id}}" class="collapse">
+            <ul ng-if="!process.isPrimitive" class="no-bulleting">
+                <li ng-repeat="process in process.childProcesses" ng-include="'processTree'">
+                </li>
+                <li>
+                    <md-button class="md-fab md-mini md-primary" ng-click="createNewSubprocess($event, process.id)">
+                        <i class="fa fa-plus"></i>
+                        <md-tooltip md-direction="right">
+                            Create new subprocess
+                        </md-tooltip>
+                    </md-button>
+                    <md-button class="md-fab md-mini md-accent"
+                               ng-click="createNewPrimitiveProcess($event, process.id)">
+                        <i class="fa fa-plus"></i>
+                        <md-tooltip md-direction="right">
+                            Create new primitive process
+                        </md-tooltip>
+                    </md-button>
+                </li>
+            </ul>
+            <ul ng-if="process.isPrimitive" class="no-bulleting">
+                <li ng-repeat="activity in process.activities">
+                    <md-button class="md-accent" ng-click="getDescriptorsForActivity($event, activity)">
+                        {{activity.name}}
+                    </md-button>
+                </li>
+                <li>
+                    <md-button class="md-fab md-mini md-primary"
+                               ng-click="showCreateActivityDialog($event, process.id)">
+                        <i class="fa fa-plus"></i>
+                        <md-tooltip md-direction="right">
+                            Create new activity
+                        </md-tooltip>
+                    </md-button>
+                </li>
+            </ul>
+            <hr/>
+        </div>
+    </script>
+</div>
+<div class="col-md-6" ng-show="selectedActivity != null">
+
+    <div layout="column" layout-padding ng-cloak>
+
+        <md-content class="md-no-momentum" class="col-md-6">
+            <md-input-container class="md-icon-float md-block" ng-repeat="d in inputType.descriptors">
+                <label>{{d.name}}</label>
+                <input ng-model="d.value" type="text">
+            </md-input-container>
+        </md-content>
+
+        <md-content class="md-no-momentum" class="col-md-6">
+            <md-input-container class="md-icon-float md-block" ng-repeat="d in outputType.descriptors">
+                <label>{{d.name}}</label>
+                <input ng-model="d.value" type="text">
+            </md-input-container>
+        </md-content>
+
+        <md-button class="md-accent" ng-click="createDocuments($event, inputType, outputType)">
+            Save document
+        </md-button>
+
     </div>
-</script>
+
+</div>
 
 <div style="visibility: hidden">
     <div class="md-dialog-container" id="createActivityDialog">

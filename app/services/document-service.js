@@ -1,9 +1,9 @@
-app.factory('DocTypeService', ['$http', '$rootScope', 'API_URL',
+app.factory('DocumentService', ['$http', '$rootScope', 'API_URL',
     function ($http, $rootScope, API_URL) {
         var service = {};
 
         service.getAll = function (callback) {
-            $http.get(API_URL + 'documenttypes')
+            $http.get(API_URL + 'documents')
                 .then(function successCallback(response) {
                     callback(response)
                 }, function errorCallback(response) {
@@ -12,7 +12,7 @@ app.factory('DocTypeService', ['$http', '$rootScope', 'API_URL',
         };
 
         service.getOne = function (id, callback) {
-            $http.get(API_URL + 'documenttypes/' + id)
+            $http.get(API_URL + 'documents/' + id)
                 .then(function successCallback(response) {
                     callback(response)
                 }, function errorCallback(response) {
@@ -20,15 +20,15 @@ app.factory('DocTypeService', ['$http', '$rootScope', 'API_URL',
                 });
         };
 
-        service.create = function (docTypeRequest, callback) {
-            $http.post(API_URL + "documenttypes", docTypeRequest)
+        service.create = function (docRequest, callback) {
+            $http.post(API_URL + "documents", docRequest)
                 .then(function successCallback(response) {
                     callback(response)
                 }, function errorCallback(response) {
                     console.log(response);
                 });
         };
-        
+
         return service;
     }
 ]);

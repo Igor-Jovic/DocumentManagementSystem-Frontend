@@ -4,8 +4,8 @@ app.directive('treeDirective', function () {
         restrict: 'E',
         scope: {},
         templateUrl: 'app/directives/tree-directive/tree.html',
-        controller: ['$rootScope', '$scope', '$mdDialog', 'ProcessService', 'TreeService', 'DocTypeService', 'ActivityService',
-            function TreeController($rootScope, $scope, $mdDialog, ProcessService, TreeService, DocTypeService, ActivityService) {
+        controller: ['$rootScope', '$scope', '$mdDialog', 'ProcessService', 'TreeService', 'DocTypeService', 'ActivityService', 'DocumentService',
+            function TreeController($rootScope, $scope, $mdDialog, ProcessService, TreeService, DocTypeService, ActivityService, DocumentService) {
                 var loadTree = function () {
                     TreeService.getProcessTree(function (response) {
                         $scope.processes = response.data.content;
@@ -83,6 +83,49 @@ app.directive('treeDirective', function () {
                             })
                         }, function () {
                         });
+                };
+
+                $scope.inputType = {};
+                $scope.outputType= {};
+                $scope.selectedActivity = null;
+
+                $scope.getDescriptorsForActivity = function (ev, activity) {
+                    $scope.selectedActivity = activity;
+                    DocTypeService.getOne(activity.inputDocumentType.id, function (response) {
+                        $scope.inputType = response.data.content;
+                    });
+
+                    DocTypeService.getOne(activity.outputDocumentType.id, function (response) {
+                        $scope.outputType = response.data.content;
+                    });
+                };
+                
+                $scope.createDocuments = function (ev, input, output) {
+                    var inputRequest = input;
+                    inputRequest.descriptors = inputRequest.descriptors.map(function (e) {
+                        delete e[name];
+                        return e;
+                    });
+                    inputRequest.activityId = $scope.selectedActivity.id;
+                    inputRequest.input = true;
+                    var outputRequest = output;
+                    outputRequest.descriptors = outputRequest.descriptors.map(function (e) {
+                        delete e[name];
+                        return e;
+                    });
+                    outputRequest.activityId = $scope.selectedActivity.id;
+                    outputRequest.input = false;
+                    DocumentService.create(inputRequest, function (response) {
+                        console.log("Input created", response.data.content);
+                        $scope.inputType = {};
+                    });
+
+                    DocumentService.create(outputRequest, function (response) {
+                        console.log("Output created", response.data.content);
+                        $scope.outputType= {};
+                    });
+
+                    $scope.selectedActivity = null;
                 };
 
                 function newProcessPrompt(ev, title) {
