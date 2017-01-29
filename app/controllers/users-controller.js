@@ -35,22 +35,6 @@ app.controller('UsersController', ['$scope', '$rootScope', 'UserService', '$mdDi
             });
         };
 
-
-        // function DialogController($scope, $mdDialog) {
-        //     $scope.hide = function () {
-        //         $scope.users = [];
-        //         $mdDialog.hide();
-        //     };
-        //
-        //     $scope.cancel = function () {
-        //         $mdDialog.cancel();
-        //     };
-        //
-        //     $scope.answer = function (answer) {
-        //         $mdDialog.hide(answer);
-        //     };
-        // };
-
         $scope.users = [
             {
                 id: 601,

@@ -196,3 +196,11 @@ md-menu-item a {
     transform: none;
     -webkit-transform: none;
 }
+
+.no-bulleting {
+    list-style-type: none;
+}
+
+.tree-root {
+    padding: 0;
+}

@@ -1,4 +1,5 @@
-app.controller('MainController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('MainController', ['$scope', '$rootScope', 'TreeService', 'ProcessService', function ($scope, $rootScope, TreeService, ProcessService) {
+
 
 }]);
 
