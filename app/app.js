@@ -34,15 +34,12 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', '$mdIconPro
 ;
 
 app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'AuthenticationService', function ($rootScope, $http, $location, $cookieStore, TOKEN, AuthenticationService) {
-    //TODO: THIS IS JUST FOR DEVELOPMENT:
-    // $rootScope.authenticatedUser = "defined";
 
     var loginAfterRefresh = function () {
         $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
         AuthenticationService.getCurrentUser(function (response) {
             console.log("getting the user")
             $rootScope.authenticatedUser = response.data.content;
-            console.log($rootScope.authenticatedUser);
             // $location.path("/main");
         });
     };
@@ -52,7 +49,6 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
 
     $rootScope.$on('$locationChangeStart', function (event) {
         if (!$rootScope.authenticatedUser) {
-            console.log("not auth?")
             $location.path("/authentication");
         }
     });
@@ -79,58 +75,5 @@ app.controller('AppController', ['$rootScope', '$mdToast', function ($rootScope,
             .content(message);
         $mdToast.show(toast);
     };
-
-    $rootScope.items = [
-        {
-            name: "item1",
-            items: [
-                {
-                    name: "item11",
-                    items: [
-                        {
-                            name: "item111",
-                            items: [
-                                {
-                                    name: "item111"
-                                },
-                                {
-                                    name: "item112"
-                                },
-                                {
-                                    name: "item113"
-                                }
-                            ]
-                        },
-                        {
-                            name: "item112"
-                        },
-                        {
-                            name: "item113"
-                        }
-                    ]
-                },
-                {
-                    name: "item12"
-                },
-                {
-                    name: "item13"
-                }
-            ]
-        },
-        {
-            name: "item2",
-            items: [
-                {
-                    name: "item21"
-                },
-                {
-                    name: "item22"
-                },
-                {
-                    name: "item23"
-                }
-            ]
-        }
-    ]
 
 }]);
