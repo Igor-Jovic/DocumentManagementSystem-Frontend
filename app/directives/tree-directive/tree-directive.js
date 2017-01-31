@@ -16,7 +16,6 @@ app.directive('treeDirective', function () {
 
                 DocTypeService.getAll(function (response) {
                     $scope.documentTypes = response.data.content;
-                    console.log($scope.documentTypes);
                 });
 
                 $scope.showCreateActivityDialog = function (ev, parentProcessId) {
@@ -36,8 +35,6 @@ app.directive('treeDirective', function () {
                 };
 
                 $scope.createActivity = function () {
-                    console.log("creating activity");
-                    console.log($scope.activityRequest);
                     ActivityService.create($scope.activityRequest, function (response) {
                         $rootScope.showToast("Successfully created activity" + response.data.content.activityName);
                         loadTree();
@@ -62,7 +59,6 @@ app.directive('treeDirective', function () {
 
                     $mdDialog.show(confirm)
                         .then(function (processName) {
-                            console.log(parentProcessId);
                             ProcessService.createSubprocess(processName, parentProcessId, function () {
                                 $rootScope.showToast("Successfully created process " + processName);
                                 loadTree();
@@ -76,7 +72,6 @@ app.directive('treeDirective', function () {
 
                     $mdDialog.show(confirm)
                         .then(function (processName) {
-                            console.log(parentProcessId);
                             ProcessService.createPrimitiveProcess(processName, parentProcessId, function () {
                                 $rootScope.showToast("Successfully created process " + processName);
                                 loadTree();
@@ -85,40 +80,43 @@ app.directive('treeDirective', function () {
                         });
                 };
 
-                $scope.inputType = {};
-                $scope.outputType= {};
                 $scope.inputDocuments = null;
                 $scope.outputDocuments = null;
-                $scope.selectedActivity = null;
 
                 $scope.getDescriptorsForActivity = function (ev, activity) {
                     $scope.selectedActivity = activity;
                     DocTypeService.getOne(activity.inputDocumentType.id, function (response) {
                         $scope.inputType = response.data.content;
                     });
-
                     DocTypeService.getOne(activity.outputDocumentType.id, function (response) {
                         $scope.outputType = response.data.content;
                     });
+                    $mdDialog.show({
+                        contentElement: '#createDocumentsDialog',
+                        parent: angular.element(document.body),
+                        targetEvent: ev,
+                        clickOutsideToClose: true
+                    });
                 };
 
+                //TODO : reintroduce
                 $scope.getDocumentsForActivity = function (ev, activity) {
                     DocumentService.getAllForActivity(activity.id, function (response) {
                         $scope.inputDocuments = response.data.content.inputs;
                         $scope.outputDocuments = response.data.content.outputs;
                     });
                 };
-                
-                $scope.createDocuments = function (ev, input, output) {
-                    var inputRequest = input;
-                    inputRequest.descriptors = inputRequest.descriptors.map(function (e) {
+
+                $scope.createDocuments = function () {
+                    var inputRequest = $scope.inputType;
+                    inputRequest.descriptors = $scope.inputType.descriptors.map(function (e) {
                         delete e[name];
                         return e;
                     });
                     inputRequest.activityId = $scope.selectedActivity.id;
                     inputRequest.input = true;
-                    var outputRequest = output;
-                    outputRequest.descriptors = outputRequest.descriptors.map(function (e) {
+                    var outputRequest = $scope.outputType;
+                    outputRequest.descriptors = $scope.outputType.descriptors.map(function (e) {
                         delete e[name];
                         return e;
                     });
@@ -126,15 +124,12 @@ app.directive('treeDirective', function () {
                     outputRequest.input = false;
                     DocumentService.create(inputRequest, function (response) {
                         console.log("Input created", response.data.content);
-                        $scope.inputType = {};
                     });
 
                     DocumentService.create(outputRequest, function (response) {
                         console.log("Output created", response.data.content);
-                        $scope.outputType= {};
                     });
-
-                    $scope.selectedActivity = null;
+                    $mdDialog.hide();
                 };
 
                 function newProcessPrompt(ev, title) {
