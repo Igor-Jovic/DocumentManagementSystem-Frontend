@@ -1,6 +1,4 @@
-<!--<div ng-include="'app/directives/tree-directive/tree-template.html'"></div>-->
-
-<div class="col-md-6" ng-cloak="">
+<div class="col-md-12">
     <ul class="no-bulleting tree-root">
         <li ng-repeat="process in processes" ng-include="'app/directives/tree-directive/tree-template.html'"></li>
         <md-button class="md-fab md-mini md-primary" ng-click="createNewProcess($event)">
