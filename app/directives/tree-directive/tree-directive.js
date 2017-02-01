@@ -38,7 +38,8 @@ app.directive('treeDirective', function () {
                     ActivityService.create($scope.activityRequest, function (response) {
                         $rootScope.showToast("Successfully created activity" + response.data.content.activityName);
                         loadTree();
-                    })
+                    });
+                    $mdDialog.hide();
                 };
 
                 $scope.createNewProcess = function (ev) {
