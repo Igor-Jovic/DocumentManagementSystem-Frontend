@@ -10,9 +10,9 @@ app.factory('DocumentService', ['$http', '$rootScope', 'API_URL',
                     console.log(response);
                 });
         };
-
-        service.getAllForActivity = function (id, callback) {
-            $http.get(API_URL + 'documents/activities/' + id)
+        //this is not restfull, document is subresource of activity, not the other way around........
+        service.getAllForActivity = function (activityId, callback) {
+            $http.get(API_URL + 'documents/activities/' + activityId)
                 .then(function successCallback(response) {
                     callback(response)
                 }, function errorCallback(response) {

@@ -28,11 +28,11 @@
     </ul>
     <ul ng-if="process.isPrimitive" class="no-bulleting">
         <li ng-repeat="activity in process.activities">
-            <md-button class="md-accent">
+            <md-button class="md-accent" ng-click="getDocumentsForActivity(activity)">
                 {{activity.name}}
             </md-button>
             <md-button class="md-fab md-mini md-primary"
-                       ng-click="getDescriptorsForActivity($event, activity)">
+                       ng-click="openCreateDocumentsDialog($event, activity)">
                 <i class="fa fa-plus"></i>
                 <md-tooltip md-direction="right">
                     Create documents

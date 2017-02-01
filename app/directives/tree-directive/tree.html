@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-5">
     <ul class="no-bulleting tree-root">
         <li ng-repeat="process in processes" ng-include="'app/directives/tree-directive/tree-template.html'"></li>
         <md-button class="md-fab md-mini md-primary" ng-click="createNewProcess($event)">
@@ -9,10 +9,64 @@
         </md-button>
     </ul>
 </div>
-<div class="col-md-6">
-    <h1>rftghjklfghjklfghjklfghjklfghjk</h1>
-</div>
+<div class="col-md-7" ng-if="selectedActivity">
+    <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+               table-card="{visible: true, title: inputType.name}"
+               mdt-row="{
+                      data: filteredInputDocuments,
+                      'table-row-id-key': 'id',
+                      'column-keys': [
+                          'id',
+                          'description',
+                          'link'
+                          ]
+                      }"
+               animate-sort-icon="true">
+        <mdt-header-row>
+            <mdt-column align-rule="left" column-sort="true"><span>ID</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Description</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Link to document</span></mdt-column>
+        </mdt-header-row>
 
+    </mdt-table>
+    <md-card style="margin:0; padding: 0;">
+        <md-input-container style="margin-left: 10px; margin-top: 30px; margin-bottom: 0; padding-bottom: 0;">
+            <label>Filter by search</label>
+            <input type="text" ng-model="filterText">
+        </md-input-container>
+    </md-card>
+    <div ng-hide="true">
+        {{(filteredInputDocuments = (inputDocuments | filter: filterText))}}
+    </div>
+    <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+               table-card="{visible: true, title: outputType.name}"
+               mdt-row="{
+                      data: filteredOutputDocuments,
+                      'table-row-id-key': 'id',
+                      'column-keys': [
+                          'id',
+                          'description',
+                          'link'
+                          ]
+                      }"
+               animate-sort-icon="true">
+        <mdt-header-row>
+            <mdt-column align-rule="left" column-sort="true"><span>ID</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Description</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Link to document</span></mdt-column>
+        </mdt-header-row>
+
+    </mdt-table>
+    <md-card style="margin:0; padding: 0;">
+        <md-input-container style="margin-left: 10px; margin-top: 30px; margin-bottom: 0; padding-bottom: 0;">
+            <label>Filter by search</label>
+            <input type="text" ng-model="filterText">
+        </md-input-container>
+    </md-card>
+    <div ng-hide="true">
+        {{(filteredOutputDocuments = (outputDocuments | filter: filterText))}}
+    </div>
+</div>
 
 <div style="visibility: hidden">
     <div class="md-dialog-container" id="createDocumentsDialog">
