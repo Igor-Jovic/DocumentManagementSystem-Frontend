@@ -11,7 +11,7 @@
 </div>
 <div class="col-md-7" ng-if="selectedActivity">
     <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
-               table-card="{visible: true, title: inputType.name}"
+               table-card="{visible: true, title: selectedActivity.inputDocumentType.name}"
                mdt-row="{
                       data: filteredInputDocuments,
                       'table-row-id-key': 'id',
@@ -39,7 +39,7 @@
         {{(filteredInputDocuments = (inputDocuments | filter: filterText))}}
     </div>
     <mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
-               table-card="{visible: true, title: outputType.name}"
+               table-card="{visible: true, title: selectedActivity.outputDocumentType.name}"
                mdt-row="{
                       data: filteredOutputDocuments,
                       'table-row-id-key': 'id',
@@ -72,27 +72,17 @@
     <div class="md-dialog-container" id="createDocumentsDialog">
         <md-dialog layout-padding>
             <md-content class="md-padding">
-                <h1 class="md-display-1 text-center">Create {{selectedActivity.inputDocumentType.name}}</h1>
-                <br/>
                 <div style="padding: 10px;">
-                    <md-content class="md-no-momentum" class="col-md-6">
-                        <md-input-container class="md-icon-float md-block" ng-repeat="d in inputType.descriptors">
-                            <label>{{d.name}}</label>
-                            <input ng-model="d.value" type="text">
-                        </md-input-container>
-                    </md-content>
-
-                    <h1 class="md-display-1 text-center">Create {{selectedActivity.outputDocumentType.name}}</h1>
+                    <h1 class="md-display-1 text-center">Create {{selectedActivity.name}} document</h1>
                     <br/>
                     <md-content class="md-no-momentum" class="col-md-6">
-                        <md-input-container class="md-icon-float md-block" ng-repeat="d in outputType.descriptors">
+                        <md-input-container class="md-icon-float md-block" ng-repeat="d in documentType.descriptors">
                             <label>{{d.name}}</label>
                             <input ng-model="d.value" type="text">
                         </md-input-container>
                     </md-content>
-
                     <md-button class="md-raised md-primary center-block"
-                               ng-click="createDocuments()">Save
+                               ng-click="createDocument()">Save
                     </md-button>
                 </div>
             </md-content>

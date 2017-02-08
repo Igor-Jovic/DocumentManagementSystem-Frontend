@@ -32,10 +32,19 @@
                 {{activity.name}}
             </md-button>
             <md-button class="md-fab md-mini md-primary"
-                       ng-click="openCreateDocumentsDialog($event, activity)">
+                       ng-show="activity.inputDocumentType"
+                       ng-click="openCreateDocumentsDialog($event, activity, true)">
                 <i class="fa fa-plus"></i>
                 <md-tooltip md-direction="right">
-                    Create documents
+                    Create input document
+                </md-tooltip>
+            </md-button>
+            <md-button class="md-fab md-mini md-primary"
+                       ng-show="activity.outputDocumentType"
+                       ng-click="openCreateDocumentsDialog($event, activity, false)">
+                <i class="fa fa-plus"></i>
+                <md-tooltip md-direction="right">
+                    Create output document
                 </md-tooltip>
             </md-button>
         </li>

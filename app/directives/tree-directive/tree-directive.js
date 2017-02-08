@@ -84,19 +84,24 @@ app.directive('treeDirective', function () {
                 $scope.inputDocuments = null;
                 $scope.outputDocuments = null;
 
-                function getDescriptorsForActivity(activity) {
-                    DocTypeService.getOne(activity.inputDocumentType.id, function (response) {
-                        $scope.inputType = response.data.content;
-                    });
-                    DocTypeService.getOne(activity.outputDocumentType.id, function (response) {
-                        $scope.outputType = response.data.content;
-                        $scope.selectedActivity.outputDescriptors = $scope.outputType.descriptors;
-                    });
+                function getDescriptorsForActivity(activity, isInput) {
+                    if (isInput) {
+                        DocTypeService.getOne(activity.inputDocumentType.id, function (response) {
+                            $scope.documentType = response.data.content;
+                            $scope.documentType.input = true;
+                        });
+                    } else {
+                        DocTypeService.getOne(activity.outputDocumentType.id, function (response) {
+                            $scope.documentType = response.data.content;
+                            $scope.documentType.input = false;
+                            $scope.selectedActivity.outputDescriptors = $scope.documentType.descriptors;
+                        });
+                    }
                 }
 
-                $scope.openCreateDocumentsDialog = function (ev, activity) {
-                    $scope.selectedActivity = activity;
-                    getDescriptorsForActivity(activity);
+                $scope.openCreateDocumentsDialog = function (ev, activity, isInput) {
+                    $scope.getDocumentsForActivity(activity);
+                    getDescriptorsForActivity(activity, isInput);
                     $mdDialog.show({
                         contentElement: '#createDocumentsDialog',
                         parent: angular.element(document.body),
@@ -107,7 +112,6 @@ app.directive('treeDirective', function () {
 
                 $scope.getDocumentsForActivity = function (activity) {
                     $scope.selectedActivity = activity;
-                    getDescriptorsForActivity(activity);
                     DocumentService.getAllForActivity(activity.id, function (response) {
                         $scope.inputDocuments = response.data.content.inputs;
                         $scope.outputDocuments = response.data.content.outputs;
@@ -115,29 +119,20 @@ app.directive('treeDirective', function () {
                     });
                 };
 
-                $scope.createDocuments = function () {
-                    var inputRequest = $scope.inputType;
-                    inputRequest.descriptors = $scope.inputType.descriptors.map(function (e) {
+                $scope.createDocument = function () {
+                    var document = $scope.documentType;
+                    document.descriptors = $scope.documentType.descriptors.map(function (e) {
                         delete e[name];
                         return e;
                     });
-                    inputRequest.activityId = $scope.selectedActivity.id;
-                    inputRequest.input = true;
-                    var outputRequest = $scope.outputType;
-                    outputRequest.descriptors = $scope.outputType.descriptors.map(function (e) {
-                        delete e[name];
-                        return e;
-                    });
-                    outputRequest.activityId = $scope.selectedActivity.id;
-                    outputRequest.input = false;
-                    DocumentService.create(inputRequest, function (response) {
-                        console.log("Input created", response.data.content);
-                        $scope.inputDocuments.push(response.data.content)
-                    });
-
-                    DocumentService.create(outputRequest, function (response) {
-                        console.log("Output created", response.data.content);
-                        $scope.outputDocuments.push(response.data.content)
+                    document.activityId = $scope.selectedActivity.id;
+                    DocumentService.create(document, function (response) {
+                        console.log("Document created", response.data.content);
+                        if (document.input) {
+                            $scope.inputDocuments.push(response.data.content)
+                        } else {
+                            $scope.outputDocuments.push(response.data.content)
+                        }
                     });
                     $mdDialog.hide();
                 };
@@ -153,4 +148,5 @@ app.directive('treeDirective', function () {
             }]
     }
 
-});
+})
+;
