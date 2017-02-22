@@ -81,6 +81,10 @@
                             <input ng-model="d.value" type="text">
                         </md-input-container>
                     </md-content>
+                    <div class="form-group">
+                        <label>Dokument</label>
+                        <input class="btn btn-default" type="file" file-model="documentFile">
+                    </div>
                     <md-button class="md-raised md-primary center-block"
                                ng-click="createDocument()">Save
                     </md-button>

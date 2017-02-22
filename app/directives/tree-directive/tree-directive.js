@@ -120,21 +120,25 @@ app.directive('treeDirective', function () {
                 };
 
                 $scope.createDocument = function () {
-                    var document = $scope.documentType;
-                    document.descriptors = $scope.documentType.descriptors.map(function (e) {
-                        delete e[name];
-                        return e;
+                    DocumentService.uploadFile($scope.documentFile, function (response) {
+                        var fileName = response.data.content;
+                        var document = $scope.documentType;
+                        document.descriptors = $scope.documentType.descriptors.map(function (e) {
+                            delete e[name];
+                            return e;
+                        });
+                        document.activityId = $scope.selectedActivity.id;
+                        document.fileName = fileName;
+                        DocumentService.create(document, function (response) {
+                            console.log("Document created", response.data.content);
+                            if (document.input) {
+                                $scope.inputDocuments.push(response.data.content)
+                            } else {
+                                $scope.outputDocuments.push(response.data.content)
+                            }
+                        });
+                        $mdDialog.hide();
                     });
-                    document.activityId = $scope.selectedActivity.id;
-                    DocumentService.create(document, function (response) {
-                        console.log("Document created", response.data.content);
-                        if (document.input) {
-                            $scope.inputDocuments.push(response.data.content)
-                        } else {
-                            $scope.outputDocuments.push(response.data.content)
-                        }
-                    });
-                    $mdDialog.hide();
                 };
 
                 function newProcessPrompt(ev, title) {

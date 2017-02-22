@@ -10,7 +10,7 @@ app.factory('DocumentService', ['$http', '$rootScope', 'API_URL',
                     console.log(response);
                 });
         };
-        //this is not restfull, document is subresource of activity, not the other way around........
+
         service.getAllForActivity = function (activityId, callback) {
             $http.get(API_URL + 'documents/activities/' + activityId)
                 .then(function successCallback(response) {
@@ -36,6 +36,19 @@ app.factory('DocumentService', ['$http', '$rootScope', 'API_URL',
                 }, function errorCallback(response) {
                     console.log(response);
                 });
+        };
+
+        service.uploadFile = function (file, callback) {
+            var fd = new FormData();
+            fd.append('document', file);
+            $http.post(API_URL + 'documents' + '/file', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function (response) {
+                callback(response);
+            }, function errorCallback(response) {
+                console.log(response);
+            });
         };
 
         return service;
