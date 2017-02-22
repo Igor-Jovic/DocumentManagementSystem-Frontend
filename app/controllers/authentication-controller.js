@@ -27,7 +27,7 @@ app.controller('AuthenticationController', ['$scope', '$rootScope', '$location',
 
         $scope.register = function () {
             if ($scope.passwordConfirmed != $scope.registrationRequest.password) {
-                $rootScope.showToast("Passwords do not match")
+                $rootScope.showToast("Passwords do not match");
                 return;
             }
             AuthenticationService.register($scope.registrationRequest, function (response) {

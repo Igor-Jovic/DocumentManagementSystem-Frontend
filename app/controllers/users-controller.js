@@ -9,7 +9,7 @@ app.controller('UsersController', ['$scope', '$rootScope', 'UserService', '$mdDi
 
         $scope.createUser = function () {
             if ($scope.passwordConfirmed != $scope.userRequest.password) {
-                $rootScope.showToast("Passwords do not match")
+                $rootScope.showToast("Passwords do not match");
                 return;
             }
             UserService.createUser($scope.userRequest, function (response) {
