@@ -5,7 +5,9 @@ app.directive('treeDirective', function () {
         scope: {},
         templateUrl: 'app/directives/tree-directive/tree.html',
         controller: ['$rootScope', '$scope', '$mdDialog', 'ProcessService', 'TreeService', 'DocTypeService', 'ActivityService', 'DocumentService',
+
             function TreeController($rootScope, $scope, $mdDialog, ProcessService, TreeService, DocTypeService, ActivityService, DocumentService) {
+                $scope.authenticatedUser = $rootScope.authenticatedUser;
                 var loadTree = function () {
                     TreeService.getProcessTree(function (response) {
                         $scope.processes = response.data.content;
@@ -13,7 +15,6 @@ app.directive('treeDirective', function () {
                 };
 
                 loadTree();
-
                 DocTypeService.getAll(function (response) {
                     $scope.documentTypes = response.data.content;
                 });

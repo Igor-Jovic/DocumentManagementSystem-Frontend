@@ -49,7 +49,7 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <md-button aria-label="Insert Drive">
+                        <md-button>
                             <a href="#!/main"><i class="fa fa-align-left fa-2x"></i></a>
                             <md-tooltip md-visible="false" md-direction="right">
                                 Process management
@@ -65,7 +65,7 @@
                         </md-button>
                     </li>
                     <li>
-                        <md-button aria-label="Insert Drive">
+                        <md-button ng-if="authenticatedUser.userRole=='ADMIN'">
                             <a href="#!/documenttype"><i class="fa fa-file-text fa-2x"></i></a>
                             <md-tooltip md-visible="false" md-direction="right">
                                 Document type management

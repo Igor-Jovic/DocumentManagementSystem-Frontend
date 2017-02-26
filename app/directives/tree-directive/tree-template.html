@@ -11,14 +11,16 @@
             ng-include="'app/directives/tree-directive/tree-template.html'">
         </li>
         <li>
-            <md-button class="md-fab md-mini md-primary" ng-click="createNewSubprocess($event, process.id)">
+            <md-button class="md-fab md-mini md-primary" ng-click="createNewSubprocess($event, process.id)"
+                       ng-if="authenticatedUser.userRole=='ADMIN'">
                 <i class="fa fa-plus"></i>
                 <md-tooltip md-direction="right">
                     Create new subprocess
                 </md-tooltip>
             </md-button>
             <md-button class="md-fab md-mini md-accent"
-                       ng-click="createNewPrimitiveProcess($event, process.id)">
+                       ng-click="createNewPrimitiveProcess($event, process.id)"
+                       ng-if="authenticatedUser.userRole=='ADMIN'">
                 <i class="fa fa-plus"></i>
                 <md-tooltip md-direction="right">
                     Create new primitive process
@@ -50,7 +52,8 @@
         </li>
         <li>
             <md-button class="md-fab md-mini md-primary"
-                       ng-click="showCreateActivityDialog($event, process.id)">
+                       ng-click="showCreateActivityDialog($event, process.id)"
+                       ng-if="authenticatedUser.userRole=='ADMIN'">
                 <i class="fa fa-plus"></i>
                 <md-tooltip md-direction="right">
                     Create new activity
