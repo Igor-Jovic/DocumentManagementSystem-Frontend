@@ -38,9 +38,7 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
     var loginAfterRefresh = function () {
         $http.defaults.headers.common["X-Authorization"] = $cookieStore.get(TOKEN);
         AuthenticationService.getCurrentUser(function (response) {
-            console.log("getting the user");
             $rootScope.authenticatedUser = response.data.content;
-            // $location.path("/main");
         });
     };
     if ($cookieStore.get(TOKEN)) {
@@ -56,7 +54,6 @@ app.run(['$rootScope', '$http', '$location', '$cookieStore', 'TOKEN', 'Authentic
     $rootScope.logout = function () {
         $rootScope.authenticatedUser = undefined;
         AuthenticationService.logout(function (response) {
-            console.log("logout");
             console.log(response)
         })
     };

@@ -115,7 +115,6 @@ app.directive('treeDirective', function () {
                     DocumentService.getAllForActivity(activity.id, function (response) {
                         $scope.inputDocuments = response.data.content.inputs;
                         $scope.outputDocuments = response.data.content.outputs;
-                        console.log(response.data.content);
                     });
                 };
 
@@ -130,7 +129,6 @@ app.directive('treeDirective', function () {
                         document.activityId = $scope.selectedActivity.id;
                         document.fileName = fileName;
                         DocumentService.create(document, function (response) {
-                            console.log("Document created", response.data.content);
                             if (document.input) {
                                 $scope.inputDocuments.push(response.data.content)
                             } else {

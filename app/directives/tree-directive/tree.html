@@ -18,15 +18,19 @@
                       'column-keys': [
                           'id',
                           'description',
-                          'link'
+                          'downloadLink'
                           ]
                       }"
                animate-sort-icon="true">
         <mdt-header-row>
             <mdt-column align-rule="left" column-sort="true"><span>ID</span></mdt-column>
             <mdt-column align-rule="left" column-sort="true"><span>Description</span></mdt-column>
-            <mdt-column align-rule="left" column-sort="true"><span>Link to document</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true"><span>Document download</span></mdt-column>
         </mdt-header-row>
+
+        <mdt-custom-cell column-key="downloadLink">
+            <a ng-href="{{value}}"><span class="fa fa-2x fa-download"></span></a>
+        </mdt-custom-cell>
 
     </mdt-table>
     <md-card style="margin:0; padding: 0;">
@@ -46,7 +50,7 @@
                       'column-keys': [
                           'id',
                           'description',
-                          'link'
+                          'downloadLink'
                           ]
                       }"
                animate-sort-icon="true">
@@ -55,6 +59,10 @@
             <mdt-column align-rule="left" column-sort="true"><span>Description</span></mdt-column>
             <mdt-column align-rule="left" column-sort="true"><span>Link to document</span></mdt-column>
         </mdt-header-row>
+
+        <mdt-custom-cell column-key="downloadLink">
+            <a ng-href="{{value}}"><span class="fa fa-2x fa-download"></span></a>
+        </mdt-custom-cell>
 
     </mdt-table>
     <md-card style="margin:0; padding: 0;">
